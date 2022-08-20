@@ -33,7 +33,7 @@ class TestingConfig(BaseConfig):
 class DevelopmentConfig(BaseConfig):
     DEBUG = True
     SQLALCHEMY_ECHO = True
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + BASE_DIR.joinpath('project.db').as_posix()
+    SQLALCHEMY_DATABASE_URI = "sqlite:///" + BASE_DIR.joinpath('movies.db').as_posix()
 
 
 class ProductionConfig(BaseConfig):
@@ -55,4 +55,4 @@ class ConfigFactory:
         raise NotImplementedError
 
 
-config = ConfigFactory.get_config()
+config = DevelopmentConfig
