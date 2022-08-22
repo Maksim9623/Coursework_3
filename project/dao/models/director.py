@@ -1,16 +1,18 @@
 from marshmallow import Schema, fields
-
-from project.dao.models.base import BaseModel
-from project.setup.db import db
+from sqlalchemy import Column, String
 
 
-class Director(BaseModel):
+from project.setup.db.models import Base
+
+
+class Director(Base):
     __tablename__ = 'directors'
 
-    name = db.Column(db.String(255))
+    name = Column(String(255), unique=True, nullable=False)
 
 
 class DirectorSchema(Schema):
+    ### Схема для сериализации ###
     id = fields.Integer()
     name = fields.String()
 

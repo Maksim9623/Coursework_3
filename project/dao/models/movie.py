@@ -1,12 +1,13 @@
 from marshmallow import Schema, fields
 
-from project.dao.models.base import BaseModel
+
 from project.dao.models.director import Director
 from project.dao.models.genre import Genre
 from project.setup.db import db
+from project.setup.db.models import Base
 
 
-class Movie(BaseModel):
+class Movie(Base):
     __tablename__ = 'movies'
 
     title = db.Column(db.String(255))
@@ -15,16 +16,17 @@ class Movie(BaseModel):
     year = db.Column(db.Integer)
     rating = db.Column(db.Float)
     genre_id = db.Column(db.ForeignKey(Genre.id))
-    #genre = db.relationship("Genres")
+    genre = db.relationship("Genre")
     director_id = db.Column(db.ForeignKey(Director.id))
-    #director = db.relationship("Directors")
+    director = db.relationship("Director")
 
 
 class MovieSchema(Schema):
+### Схема для сериализации ###
 
     id = fields.Int()
     title = fields.Str()
     description = fields.Str()
     trailer = fields.Str()
     year = fields.Int()
-    rating = fields.Int()
+    rating = fields.Float()

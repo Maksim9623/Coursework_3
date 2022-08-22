@@ -1,15 +1,16 @@
 from marshmallow import Schema, fields
+from sqlalchemy import Column, String
 
-from project.dao.models.base import BaseModel
-from project.setup.db import db
+from project.setup.db.models import Base
 
 
-class Genre(BaseModel):
+class Genre(Base):
     __tablename__ = 'genres'
 
-    name = db.Column(db.String(255), unique=True, nullable=False)
+    name = Column(String(255), unique=True, nullable=False)
 
 
 class GenreSchema(Schema):
+    ### Схема для сериализации ###
     id = fields.Int()
     name = fields.Str()

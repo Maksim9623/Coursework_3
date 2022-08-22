@@ -1,30 +1,15 @@
-from project.dao.movie import MovieDAO
+from typing import Optional
+
+from project.dao import MoviesDAO
+from project.dao.models.movie import Movie
 
 
 class MovieService:
-    def __init__(self, dao: MovieDAO):
+    def __init__(self, dao: MoviesDAO):
         self.dao = dao
 
     def get_one(self, mid):
-        return self.dao.get_one(mid)
+        return self.dao.get_by_id(mid)
 
-    def get_all(self, filters):
-        if filters.get("director_id") is not None:
-            movies = self.dao.get_by_director_id(filters.get("director_id"))
-        elif filters.get("genre_id") is not None:
-            movies = self.dao.get_by_genre_id(filters.get("genre_id"))
-        elif filters.get("year") is not None:
-            movies = self.dao.get_by_year(filters.get("year"))
-        else:
-            movies = self.dao.get_all()
-        return movies
-
-    def create(self, movie_d):
-        return self.dao.create(movie_d)
-
-    def update(self, movie_d):
-        self.dao.update(movie_d)
-        return self.dao
-
-    def delete(self, mid):
-        self.dao.delete(mid)
+    def get_all(self, filter=None, page: Optional[int] = None) -> list[Movie]:
+        return self.dao.get_fresh(page=page, filter=filter)

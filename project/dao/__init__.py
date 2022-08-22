@@ -1,11 +1,16 @@
-from .director import DirectorDAO
-from .genre import GenreDAO
-from .movie import MovieDAO
+from .auth import AuthDAO
+from .main_dao import DirectorsDAO, GenresDAO, MoviesDAO
+from .user import UserDAO
 
 __all__ = [
-    'GenreDAO',
-    'DirectorDAO',
-    'MovieDAO',
+    'GenresDAO',
+    'DirectorsDAO',
+    'MoviesDAO',
+    'AuthDAO',
+    'UserDAO',
+
 ]
+
+
 
 

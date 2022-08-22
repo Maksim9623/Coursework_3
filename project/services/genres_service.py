@@ -1,22 +1,17 @@
-from project.dao.genre import GenreDAO
+from project.dao.base import BaseDAO
+# from project.dao.genre import GenreDAO
+from project.exceptions import ItemNotFound
 
 
 class GenreService:
-    def __init__(self, dao: GenreDAO):
+    def __init__(self, dao: BaseDAO):
         self.dao = dao
 
-    def get_one(self, bid):
-        return self.dao.get_one(bid)
+    def get_item(self, pk):
+        if genre := self.dao.get_by_id(pk):
+            return genre
+        raise ItemNotFound(f'Genre with pk={pk} not exists.')
 
-    def get_all(self):
-        return self.dao.get_all()
+    def get_all(self, page):
+        return self.dao.get_all(page=page)
 
-    def create(self, genre_d):
-        return self.dao.create(genre_d)
-
-    def update(self, genre_d):
-        self.dao.update(genre_d)
-        return self.dao
-
-    def delete(self, rid):
-        self.dao.delete(rid)
