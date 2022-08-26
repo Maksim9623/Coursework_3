@@ -40,6 +40,7 @@ def generate_tokens(user):
     )
 
     payload['exp'] = datetime.utcnow() + timedelta(days=current_app.config['TOKEN_EXPIRE_DAYS'])
+
     refresh_token = jwt.encode(
         payload=payload,
         key=current_app.config['SECRET_KEY'],

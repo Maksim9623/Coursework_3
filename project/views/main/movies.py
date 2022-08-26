@@ -19,7 +19,7 @@ class MoviesView(Resource):
         all_movies = movie_service.get_all(**page_parser.parse_args())
 
         if request.args.get('status') == 'new':
-            return movie_service.get_all(filters=request.args.get('status'), **page_parser.parse_args())
+            return movie_service.get_all(filter=request.args.get('status'), **page_parser.parse_args())
 
         return all_movies
 
